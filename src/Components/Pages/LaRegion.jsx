@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./Navbar";
-import bg from "../../assets/bg.jpg";
+// import bg from "../../assets/bg.jpg";
 import CarouselLugares from "./CarouselLugares";
 
 const LaRegion = () => {

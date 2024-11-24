@@ -1,16 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../Pages/Navbar";
-import bg from "../../assets/bg.jpg";
+
 import elRocio from "../../assets/elRocio.jpg";
 import map from "../../assets/map.png";
-import img1 from "../../assets/img1.jpg";
-import img2 from "../../assets/img2.jpg";
+import title from "../../assets/Title.png";
+import molinoevento2 from "../../assets/molinoevento2.png";
+import molinoaereo from "../../assets/molinoaereo.png";
+import palamaranimal2 from "../../assets/palamaranimal2.png";
+import termascolonaereo from "../../assets/termascolonaereo.png";
+import termascolon from "../../assets/termascolon.jpg";
+import puertocolonaereo from "../../assets/puertocolonaereo.png";
 import pileta from "../../assets/pileta.jpg";
 import Whatsapp from "../Pages/Whatsapp";
 import Carousel from "../Pages/Carousel";
+import Contenedor from "../Pages/Contenedor";
+
 const Home = () => {
   const [frontInfo, setFrontInfo] = useState(false);
+  const [currentImage, setCurrentImage] = useState(termascolonaereo);
+  const [currentImage1, setCurrentImage1] = useState(molinoaereo);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage1((prevImage) =>
+        prevImage === molinoaereo ? molinoevento2 : molinoaereo
+      );
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prevImage) =>
+        prevImage === termascolonaereo ? termascolon : termascolonaereo
+      );
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
   const handleToggleInfoFront = () => {
     setFrontInfo(!frontInfo);
   };
@@ -25,16 +53,17 @@ const Home = () => {
   };
   return (
     <>
+    
       <section
         className="home-section relative text-white"
         style={{
-          backgroundImage: `url(${bg})`,
-          // backgroundColor: "black",
+          backgroundImage: `url(${title})`,
+          backgroundColor: "#b5907422",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
-          minHeight: "50vh",
+
           height: "100vh",
           display: "flex",
           justifyContent: "center",
@@ -42,14 +71,14 @@ const Home = () => {
           textAlign: "center",
           padding: "0 10%",
           margin: "0%",
-          transition: "background-size 4s ease-in-out", // Esto es para la transición de la escala
+          transition: "background-size 4s ease-in-out",
         }}
         onMouseEnter={() => {
-          document.querySelector(".home-section").style.backgroundSize = "110%"; // Aumentar el tamaño al hacer hover
+          document.querySelector(".home-section").style.backgroundSize = "110%";
         }}
         onMouseLeave={() => {
           document.querySelector(".home-section").style.backgroundSize =
-            "cover"; // Volver al tamaño original
+            "cover";
         }}
       >
         <div
@@ -57,16 +86,17 @@ const Home = () => {
           style={{
             left: 0,
             textAlign: "right",
+            zIndex: 9999,
           }}
         >
           <Whatsapp />
         </div>
         <div
-          className="absolute top-0 left-0 w-full h-auto p-4 bg-[#604a3ae8] opacity-60 z-10"
+          className="absolute top-0 left-0 w-full bg-[#d5b9a4fa] opacity-90 z-10"
           style={{
             top: 0,
             left: 0,
-            zIndex: 10, // Asegura que este contenedor esté encima del contenido
+            zIndex: 10,
           }}
         >
           <Navbar />
@@ -74,46 +104,14 @@ const Home = () => {
 
         <div className="flex flex-col items-center w-100vh">
           <div className="flex flex-col md:flex-row justify-around items-center w-full">
-            {/* Primer texto - Lado Izquierdo */}
             <motion.h1
               initial="hidden"
               animate="visible"
               variants={scrollAnimation}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-yellow-500 text-bold font-custom w-full md:w-1/2"
               style={{ textAlign: "left" }}
-            >
-              {/* <h1 className="text-orange-500">Bienvenido,</h1>
-               */}
-            </motion.h1>
-
-            {/* Segundo texto - Lado Derecho */}
-            {/* <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={scrollAnimation}
-              transition={{ delay: 0.2 }}
-              className="p-6 rounded-lg shadow-lg text-lg md:text-xl lg:text-2xl mb-8 text-black w-full md:w-1/2"
-              style={{ textAlign: "right" }}
-            >
-              <img src="" alt="" className="animate-pulse" />
-            </motion.p> */}
+            ></motion.h1>
           </div>
-          {/* <button className="bg-transparent text-yellow-500 text-bold py-2 px-6 rounded text-lg font-bold animate-bounce">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
-              />
-            </svg>
-          </button> */}
         </div>
       </section>
 
@@ -157,32 +155,16 @@ const Home = () => {
       </motion.section>
 
       <motion.section
-  id="image"
-  className="about bg-[#b5907422] text-left py-0 px-0"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={scrollAnimation}
-  custom={1.8}
->
-  <ul className="about-list mx-auto max-w-full grid grid-cols-1 md:grid-cols-2 gap-0 text-gray-600">
-    <motion.li
-      className="d-flex justify-center align-middle pt-8"
-      variants={scrollAnimation}
-      custom={2}
-    >
-      <img src={img1} alt="" className="w-full h-full object-cover" />
-    </motion.li>
-
-    <motion.li
-      className="d-flex justify-center align-middle pt-8"
-      variants={scrollAnimation}
-      custom={2}
-    >
-      <img src={img2} alt="" className="w-full h-full object-cover" />
-    </motion.li>
-  </ul>
-</motion.section>
+        id="image"
+        className="about bg-[#b5907422] text-left py-0 px-0"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={scrollAnimation}
+        custom={1.8}
+      >
+        <Contenedor />
+      </motion.section>
 
       <motion.section
         id="cabañas"
@@ -370,26 +352,30 @@ const Home = () => {
           </motion.li>
         </ul>
       </motion.section>
-      
+
       <motion.section
-  id="image"
-  className="about bg-[#b5907422] text-left py-0 px-0" // Eliminar padding en la sección
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={scrollAnimation}
-  custom={2.4}
->
-  <ul className="about-list mx-0 w-full grid grid-cols-1 gap-0 text-gray-600">
-    <motion.li
-      className="d-flex justify-center align-middle p-0" // Eliminar padding en el li
-      variants={scrollAnimation}
-      custom={2.5}
-    >
-      <img src={pileta} alt="Imagen de la piscina" className="w-full h-200 object-cover" />
-    </motion.li>
-  </ul>
-</motion.section>
+        id="image"
+        className="about bg-[#b5907422] text-left py-0 px-0"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={scrollAnimation}
+        custom={2.4}
+      >
+        <ul className="about-list mx-0 w-full grid grid-cols-1 gap-0 text-gray-600">
+          <motion.li
+            className="d-flex justify-center align-middle p-0"
+            variants={scrollAnimation}
+            custom={2.5}
+          >
+            <img
+              src={pileta}
+              alt="Imagen de la piscina"
+              className="w-full h-200 object-cover"
+            />
+          </motion.li>
+        </ul>
+      </motion.section>
 
       <motion.section
         id="map"
@@ -408,14 +394,14 @@ const Home = () => {
           >
             <div className="space-y-4">
               <p className="text-[#b59074]">
-                Ubicado en un estratégico lugar, rodeado de naturaleza, ideado
-                para ofrecerte un refugio de paz y relajación.
+                Ubicado en un estratégico lugar, ideado para ofrecerte un
+                refugio de paz y relajación.
               </p>
               <p className="text-[#b59074]">
                 A minutos de las playas y termas de Colón y San José.
               </p>
               <p className="text-[#b59074]">
-                Mini Market y FastFood a solo unos pasos.
+                Mini mercado y comidas rápidas a solo unos pasos.
               </p>
               <p className="text-[#b59074]">
                 En las cercanías de Molino Forclaz y Granja la Administración
@@ -489,8 +475,104 @@ const Home = () => {
             </div>
           </motion.li>
         </ul>
+        <div className="border-t border-[#b59074] pb-4"></div>
       </motion.section>
-      <div></div>
+
+      <motion.section
+        id="laregion"
+        className="about bg-[#b5907422] text-left py-0 px-0 w-full"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={scrollAnimation}
+        custom={2.9}
+      >
+        <div className="flex justify-center items-center pb-4 text-[#b59074]">
+          Qué visitar si venis a Colón
+        </div>
+        <ul className="about-list mx-auto max-w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0 text-gray-600 overflow-hidden">
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.91}
+          >
+            <div className="flex justify-center items-center w-full h-full text-center">
+              <h2>Termas Colón</h2>
+            </div>
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.94}
+          >
+            <img
+              src={currentImage}
+              alt="Imagen dinámica"
+              className="w-full h-full object-cover"
+            />
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.93}
+          >
+            <div className="flex justify-center items-center w-full h-full text-center">
+              <h2>Puerto de Colón</h2>
+            </div>
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.94}
+          >
+            <img
+              src={puertocolonaereo}
+              alt="Imagen 2"
+              className="w-full h-full object-cover"
+            />
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.95}
+          >
+            <img
+              src={palamaranimal2}
+              alt="Imagen 3"
+              className="w-full h-full object-cover"
+            />
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.96}
+          >
+            <div className="flex justify-center items-center w-full h-full text-center">
+              <h2>Parque Nacional El Palmar</h2>
+            </div>
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.97}
+          >
+            <img
+              src={currentImage1}
+              alt="Imagen dinámica"
+              className="w-full h-full object-cover"
+            />
+          </motion.li>
+          <motion.li
+            className="flex justify-center items-center w-full h-full"
+            variants={scrollAnimation}
+            custom={2.98}
+          >
+            <div className="flex justify-center items-center w-full h-full text-center">
+              <h2>Molino Forclaz</h2>
+            </div>
+          </motion.li>
+        </ul>
+      </motion.section>
 
       <motion.section
         className="benefits bg-[#b5907422] text-center py-16 pb-4 pt-4"
@@ -498,8 +580,10 @@ const Home = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={scrollAnimation}
-        custom={2.9}
-      > <div className="border-t border-[#b59074] mt-4"></div>
+        custom={2.93}
+      >
+        {" "}
+        <div className="border-t border-[#b59074] mt-4"></div>
         <div className="d-flex pt-4 justify-content-center align-items-center">
           <h6 className="mb-0 text-[#b59074be] text-bold">
             Creado con{" "}

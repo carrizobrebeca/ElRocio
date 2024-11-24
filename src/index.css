@@ -12,7 +12,6 @@ code {
     monospace;
 }
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,4 +28,17 @@ code {
 .home-section {
   animation: scaleBackground 4s ease-in-out forwards;
 }
-
+/* 
+@media (max-width: 350px) {
+  .home-section {
+    background-size: cover;  
+   
+    
+    background-position: top;
+    background-repeat: repeat;
+width: 350px;
+height: auto;
+    margin-top: 0%;
+    
+  }
+} */

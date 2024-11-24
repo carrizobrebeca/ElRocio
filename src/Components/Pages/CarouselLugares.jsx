@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import { useSwipeable } from "react-swipeable"; 
-import bg from "../../assets/bg.jpg";
+import bg from "../../assets/puertocolonaereo.png";
 import palmar from "../../assets/palmar.jpg";
 import palmar2 from "../../assets/palmar2.png";
 import puerto from "../../assets/puerto.png";
@@ -20,7 +20,7 @@ import puertocolonaereo from "../../assets/puertocolonaereo.png";
 const images = [
   { 
     src: bg, 
-    key: 'Playa Santiago Inkier'
+    key: 'Puerto'
   },
   { 
     src: termascoloaereo, 
