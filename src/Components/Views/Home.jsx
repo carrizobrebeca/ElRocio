@@ -21,6 +21,21 @@ const Home = () => {
   const [currentImage, setCurrentImage] = useState(termascolonaereo);
   const [currentImage1, setCurrentImage1] = useState(molinoaereo);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth <= 640);  // 640px es el tamaño para sm
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();  // Llamamos al resize inicialmente para definir el estado correcto
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage1((prevImage) =>
@@ -54,33 +69,37 @@ const Home = () => {
   return (
     <>
     
-      <section
-        className="home-section relative text-white"
-        style={{
-          backgroundImage: `url(${title})`,
-          backgroundColor: "#b5907422",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          width: "100%",
-
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          padding: "0 10%",
-          margin: "0%",
-          transition: "background-size 4s ease-in-out",
-        }}
-        onMouseEnter={() => {
+    <section
+      className={`home-section relative text-white w-[350px] ${isSmallScreen ? '' : 'with-transition'}`}
+      style={{
+        backgroundImage: `url(${title})`,
+        backgroundColor: "#b5907422",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        minHeight: '50vh',
+        height: '100vh',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        padding: "0 10%",
+        margin: "0%",
+        transition: isSmallScreen ? 'none' : 'background-size 4s ease-in-out', // Controlamos la transición aquí
+      }}
+      onMouseEnter={() => {
+        if (!isSmallScreen) {
           document.querySelector(".home-section").style.backgroundSize = "110%";
-        }}
-        onMouseLeave={() => {
-          document.querySelector(".home-section").style.backgroundSize =
-            "cover";
-        }}
-      >
+        }
+      }}
+      onMouseLeave={() => {
+        if (!isSmallScreen) {
+          document.querySelector(".home-section").style.backgroundSize = "cover";
+        }
+      }}
+    >
+
         <div
           className="absolute bottom-0 left-0 w-full h-auto p-4 bg-transparent flex justify-end items-end"
           style={{

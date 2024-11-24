@@ -28,22 +28,22 @@ const LaRegion = () => {
           backgroundRepeat: "no-repeat",
           width: "100%",
           minHeight: "50vh",
-          height: "100&",
+          height: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
           padding: "0 10%",
           margin: "0%",
-          transition: "background-size 4s ease-in-out", // Esto es para la transición de la escala
+          // transition: "background-size 4s ease-in-out", // Esto es para la transición de la escala
         }}
-        onMouseEnter={() => {
-          document.querySelector(".home-section").style.backgroundSize = "110%"; // Aumentar el tamaño al hacer hover
-        }}
-        onMouseLeave={() => {
-          document.querySelector(".home-section").style.backgroundSize =
-            "cover"; // Volver al tamaño original
-        }}
+        // onMouseEnter={() => {
+        //   document.querySelector(".home-section").style.backgroundSize = "110%"; // Aumentar el tamaño al hacer hover
+        // }}
+        // onMouseLeave={() => {
+        //   document.querySelector(".home-section").style.backgroundSize =
+        //     "cover"; // Volver al tamaño original
+        // }}
       >
 
         <div
