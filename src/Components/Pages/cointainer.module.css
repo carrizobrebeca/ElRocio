@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  position: relative;
+}
+
+.calender {
+  padding: 20px;
+  border: 2px solid orange;
+  cursor: pointer;
+}
+
+.dateRange {
+  position: absolute;
+  top: 80px;
+  left: -180px;
+}
+.custom-border {
+  border: 2px solid #604a3ae8;
+  border-right: none; /* Elimina el borde derecho */
+}
+.custom-borderer {
+  border: 2px solid #604a3ae8;
+  border-left: none; /* Elimina el borde derecho */
+}

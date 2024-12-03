@@ -15,14 +15,16 @@ import pileta from "../../assets/pileta.jpg";
 import Whatsapp from "../Pages/Whatsapp";
 import Carousel from "../Pages/Carousel";
 import Contenedor from "../Pages/Contenedor";
+import { useNavigate } from "react-router-dom";
+import Reserva from "../Pages/Reserva";
 
 const Home = () => {
   const [frontInfo, setFrontInfo] = useState(false);
   const [currentImage, setCurrentImage] = useState(termascolonaereo);
   const [currentImage1, setCurrentImage1] = useState(molinoaereo);
 
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-
+  const [isSmallScreen, setIsSmallScreen] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth <= 640);  // 640px es el tamaño para sm
@@ -34,7 +36,7 @@ const Home = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isSmallScreen]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -120,7 +122,16 @@ const Home = () => {
         >
           <Navbar />
         </div>
-
+        <div
+          className="absolute text-xs top-100 left-0 w-full z-10 md:text-lg"
+          style={{
+            top: 100,
+            left: 0,
+            zIndex: 10,
+          }}
+        >
+          <Reserva />
+        </div>
         <div className="flex flex-col items-center w-100vh">
           <div className="flex flex-col md:flex-row justify-around items-center w-full">
             <motion.h1
@@ -201,7 +212,7 @@ const Home = () => {
             custom={2.2}
           >
             <div className="grid grid-cols-1 divide-y divide-[#b59074] divide-4">
-              <div className="pb-4">Cabañas</div>
+              <div onClick={() => navigate("/rooms")} className="pb-4 cursor-pointer hover:text-lg">Cabañas</div>
               <div className="pt-4 text-[#b59074]">
                 Para dos, cuatro o seis personas
               </div>

@@ -14,7 +14,7 @@ const Navbar = () => {
     <>
       <nav className="bg-[#d5b9a4] text-white text-xs flex justify-between items-center w-full md:text-lg">
         <h2 className="pl-4 text-bold animate-pulse">El Rocío Cabañas</h2>
-        
+        {location.pathname === "/ElRocio" && (
           <a
             href="#about"
             onClick={() => handleScroll("home")}
@@ -22,7 +22,8 @@ const Navbar = () => {
           >
             <h2 className="">Nosotros</h2>
           </a>
-
+        )}
+          {location.pathname === "/ElRocio" && (
           <a
             href="#cabañas"
             onClick={() => handleScroll("home")}
@@ -30,8 +31,8 @@ const Navbar = () => {
           >
             <h2 className="">Cabañas</h2>
           </a>
-     
-       
+       )}
+     {location.pathname === "/ElRocio" && (
        
              <a
             href="#laregion"
@@ -39,9 +40,9 @@ const Navbar = () => {
             className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"
           > La Región</a>
            
-       
+        )}
 
-
+          {location.pathname === "/ElRocio" && (
           <a
             href="#map"
             onClick={() => handleScroll("home")}
@@ -67,12 +68,12 @@ const Navbar = () => {
               />
             </svg>
           </a>
-       
+         )}
         {/* <button className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition">
      
     </button> */}
         <button className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"></button>
-        {location.pathname === "/laregion" && (
+        {location.pathname === "/rooms" && (
           <button
             onClick={() => navigate("/ElRocio")}
             className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"
