@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/ElRocio/static/css/main.ea9b2791.css",
-    "main.js": "/ElRocio/static/js/main.b7e6f92f.js",
-    "static/js/453.419a5d54.chunk.js": "/ElRocio/static/js/453.419a5d54.chunk.js",
+    "main.css": "/ElRocio/static/css/main.72f7d887.css",
+    "main.js": "/ElRocio/static/js/main.af6171bd.js",
+    "static/js/453.258b012d.chunk.js": "/ElRocio/static/js/453.258b012d.chunk.js",
     "static/media/Title.png": "/ElRocio/static/media/Title.bc4de86b129e413a7ef8.png",
     "static/media/molinoevento2.png": "/ElRocio/static/media/molinoevento2.9043d64012cb263b234f.png",
     "static/media/termasvillaelisa.png": "/ElRocio/static/media/termasvillaelisa.a2083b211a2067a7e083.png",
@@ -24,13 +24,16 @@
     "static/media/palmar.jpg": "/ElRocio/static/media/palmar.1eb469f2bd666721b0dd.jpg",
     "static/media/pileta.jpg": "/ElRocio/static/media/pileta.d5d9dbdeca474407354b.jpg",
     "static/media/nupcial-1.jpg": "/ElRocio/static/media/nupcial-1.e0251e2950682149bffd.jpg",
+    "static/media/r2.jpg": "/ElRocio/static/media/r2.983c306e29cc19fdf58a.jpg",
+    "static/media/r3.jpg": "/ElRocio/static/media/r3.f561e7426b8f96b012a7.jpg",
+    "static/media/r1.jpg": "/ElRocio/static/media/r1.a7d403fef8b9517b77aa.jpg",
     "index.html": "/ElRocio/index.html",
-    "main.ea9b2791.css.map": "/ElRocio/static/css/main.ea9b2791.css.map",
-    "main.b7e6f92f.js.map": "/ElRocio/static/js/main.b7e6f92f.js.map",
-    "453.419a5d54.chunk.js.map": "/ElRocio/static/js/453.419a5d54.chunk.js.map"
+    "main.72f7d887.css.map": "/ElRocio/static/css/main.72f7d887.css.map",
+    "main.af6171bd.js.map": "/ElRocio/static/js/main.af6171bd.js.map",
+    "453.258b012d.chunk.js.map": "/ElRocio/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea9b2791.css",
-    "static/js/main.b7e6f92f.js"
+    "static/css/main.72f7d887.css",
+    "static/js/main.af6171bd.js"
   ]
 }
