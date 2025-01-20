@@ -14,7 +14,7 @@ const Navbar = () => {
     <>
       <nav className="bg-[#d5b9a4] text-white text-xs flex justify-between items-center w-full md:text-lg">
         <h2 className="pl-4 text-bold animate-pulse">El Rocío Cabañas</h2>
-        {location.pathname === "/ElRocio" && (
+        {location.pathname === "/ElRocio/" && (
           <a
             href="#about"
             onClick={() => handleScroll("home")}
@@ -23,7 +23,7 @@ const Navbar = () => {
             <h2 className="">Nosotros</h2>
           </a>
         )}
-          {location.pathname === "/ElRocio" && (
+          {location.pathname === "/ElRocio/" && (
           <a
             href="#cabañas"
             onClick={() => handleScroll("home")}
@@ -32,7 +32,7 @@ const Navbar = () => {
             <h2 className="">Cabañas</h2>
           </a>
        )}
-     {location.pathname === "/ElRocio" && (
+     {location.pathname === "/ElRocio/" && (
        
              <a
             href="#laregion"
@@ -42,7 +42,7 @@ const Navbar = () => {
            
         )}
 
-          {location.pathname === "/ElRocio" && (
+          {location.pathname === "/ElRocio/" && (
           <a
             href="#map"
             onClick={() => handleScroll("home")}
@@ -73,9 +73,9 @@ const Navbar = () => {
      
     </button> */}
         <button className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"></button>
-        {location.pathname === "/rooms" && (
+        {location.pathname === "/ElRocio/rooms" && (
           <button
-            onClick={() => navigate("/ElRocio")}
+            onClick={() => navigate("/ElRocio/")}
             className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"
           >
             <svg
