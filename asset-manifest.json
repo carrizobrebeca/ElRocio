@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ElRocio/static/css/main.b3413c34.css",
-    "main.js": "/ElRocio/static/js/main.2abcfd65.js",
+    "main.js": "/ElRocio/static/js/main.7817b2d4.js",
     "static/js/453.258b012d.chunk.js": "/ElRocio/static/js/453.258b012d.chunk.js",
     "static/media/Title.png": "/ElRocio/static/media/Title.bc4de86b129e413a7ef8.png",
     "static/media/molinoevento2.png": "/ElRocio/static/media/molinoevento2.9043d64012cb263b234f.png",
@@ -29,11 +29,11 @@
     "static/media/r1.jpg": "/ElRocio/static/media/r1.a7d403fef8b9517b77aa.jpg",
     "index.html": "/ElRocio/index.html",
     "main.b3413c34.css.map": "/ElRocio/static/css/main.b3413c34.css.map",
-    "main.2abcfd65.js.map": "/ElRocio/static/js/main.2abcfd65.js.map",
+    "main.7817b2d4.js.map": "/ElRocio/static/js/main.7817b2d4.js.map",
     "453.258b012d.chunk.js.map": "/ElRocio/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3413c34.css",
-    "static/js/main.2abcfd65.js"
+    "static/js/main.7817b2d4.js"
   ]
 }
