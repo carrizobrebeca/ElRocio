@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/ElRocio/static/css/main.72f7d887.css",
-    "main.js": "/ElRocio/static/js/main.af6171bd.js",
+    "main.css": "/ElRocio/static/css/main.b3413c34.css",
+    "main.js": "/ElRocio/static/js/main.18fe13e6.js",
     "static/js/453.258b012d.chunk.js": "/ElRocio/static/js/453.258b012d.chunk.js",
     "static/media/Title.png": "/ElRocio/static/media/Title.bc4de86b129e413a7ef8.png",
     "static/media/molinoevento2.png": "/ElRocio/static/media/molinoevento2.9043d64012cb263b234f.png",
@@ -28,12 +28,12 @@
     "static/media/r3.jpg": "/ElRocio/static/media/r3.f561e7426b8f96b012a7.jpg",
     "static/media/r1.jpg": "/ElRocio/static/media/r1.a7d403fef8b9517b77aa.jpg",
     "index.html": "/ElRocio/index.html",
-    "main.72f7d887.css.map": "/ElRocio/static/css/main.72f7d887.css.map",
-    "main.af6171bd.js.map": "/ElRocio/static/js/main.af6171bd.js.map",
+    "main.b3413c34.css.map": "/ElRocio/static/css/main.b3413c34.css.map",
+    "main.18fe13e6.js.map": "/ElRocio/static/js/main.18fe13e6.js.map",
     "453.258b012d.chunk.js.map": "/ElRocio/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.72f7d887.css",
-    "static/js/main.af6171bd.js"
+    "static/css/main.b3413c34.css",
+    "static/js/main.18fe13e6.js"
   ]
 }
