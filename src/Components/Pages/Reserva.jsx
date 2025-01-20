@@ -9,25 +9,29 @@ import { useNavigate } from "react-router-dom";
 
 const Reserva = () => {
   const navigate = useNavigate();
-  const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState({
-    startDate: new Date(),
-    endDate: new Date(),
-    key: "selection",
-  });
+  // const [openDate, setOpenDate] = useState(false);
+  // const [date, setDate] = useState({
+  //   startDate: new Date(),
+  //   endDate: new Date(),
+  //   key: "selection",
+  // });
 
-  const handleChange = (ranges) => {
-    setDate(ranges.selection);
-  };
-  const handleClick = (ranges) => {
-    setOpenDate((prev) => !prev);
-  };
+  // const handleChange = (ranges) => {
+  //   setDate(ranges.selection);
+  // };
+  // const handleClick = (ranges) => {
+  //   setOpenDate((prev) => !prev);
+  // };
 
 
   return (
     <div className={style.container}>
       <div className="flex text-[10px] justify-center md:text-lg">
-        <div className="p-4 bg-[#b59074] text-white">
+        <div className="p-2 bg-[#d5b9a4] text-white">
+          
+          <h3  className="p-2 bg-white text-[#d5b9a4] md:pl-4 md:pr-4 "> Buscá fechas disponibles y hace tu reserva </h3>
+        </div>
+        {/* <div className="p-4 bg-[#b59074] text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -53,9 +57,9 @@ const Reserva = () => {
         <div className="p-4 custom-border bg-white text-[#b59074]">-</div>
         <div className="p-4 pl-0 bg-white text-[#b59074] custom-border md:pl-4 md:pr-4 ">
           {`${format(date.endDate, "dd,MMM,yyyy")}`}
-        </div>
-        <div className="p-4 pl-0 pr-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4 ">|</div>
-        <div className="p-4 pl-0 pr-0 bg-white text-[#b59074] custom-border md:pl-4 md:pr-4 ">
+        </div> */}
+        {/* <div className="p-4 pl-0 pr-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4 ">|</div> */}
+        {/* <div className="p-4 pl-0 pr-0 bg-white text-[#b59074] custom-border md:pl-4 md:pr-4 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -70,8 +74,8 @@ const Reserva = () => {
               d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
             />
           </svg>
-        </div>
-        <select
+        </div> */}
+        {/* <select
           className="p-4 pr-0 pl-0 custom-border focus:outline-none bg-white text-[#b59074] custom-border option:hover md:pl-4 md:pr-4"
           name="select"
         >
@@ -80,11 +84,11 @@ const Reserva = () => {
             4 personas
           </option>
           <option value="value3">6 personas</option>
-        </select>
-        <div className="p-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4"></div>
-        <button onClick={() => navigate("/rooms")} className="p-4 bg-[#b59074] text-white md:pl-4 md:pr-4 ">Reservar</button>
+        </select> */}
+        {/* <div className="p-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4"></div> */}
+        <button onClick={() => navigate("/rooms")} className="p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4 ">Reservar</button>
       </div>
-
+{/* 
       {openDate && (
         <DateRangePicker
           label="Small picker"
@@ -94,7 +98,7 @@ const Reserva = () => {
           minDate={new Date()}
           locale={es}
         />
-      )}
+      )} */}
     </div>
   );
 };

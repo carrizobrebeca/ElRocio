@@ -3,7 +3,7 @@ import startReducer from './startSlice';
 import endReducer from './endSlice';
 const store = configureStore({
   reducer: {
-    stat: startReducer,
+    start: startReducer,
     end: endReducer,
   },
 });
