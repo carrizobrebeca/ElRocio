@@ -1,6 +1,6 @@
 import React from "react";
 
-const RoomCard = ({ src, title, description, price }) => {
+const RoomCard = ({ src, title, description, price, detalle, detail }) => {
   return (
     
     <div className="p-4 md:flex md:justify-start">
@@ -15,6 +15,8 @@ const RoomCard = ({ src, title, description, price }) => {
         <div className="m-4 border border-[#b59074]"></div>
         <p className="m-4">{description}</p>
         <h3 className="m-4">Precio por noche ${price}</h3>
+        <p className="m-4">*{detalle}</p>
+        <p className="m-4">*{detail}</p>
       </div>
     </div>
   );

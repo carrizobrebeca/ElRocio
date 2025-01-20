@@ -74,6 +74,22 @@ const Dates = ({ onPersonasChange }) => {
 
   const tipo = cabin();
 
+  const calcularReserva = () => {
+    let precioPorDia;
+    if (personas === "todas") {
+      return precioPorDia = "";
+    } else if (personas === "2") {
+      return precioPorDia = 60000;
+    } else if (personas === "4") {
+      return precioPorDia = 70000;
+    } else if (personas === "6") {
+      return precioPorDia = 80000;
+    }
+
+  };
+
+  const reserva = calcularReserva();
+  
   return (
     <div>
       <div className="flex flex-col pl-2 text-[10px] md:text-lg w-[350px]">
@@ -139,7 +155,7 @@ const Dates = ({ onPersonasChange }) => {
           onChange={handleSelectChange}
           value={personas} 
         >
-           <option value="todas">Todas las habitaciones</option>
+           <option value="todas">Todas las cabañas</option>
           <option value="2">2 personas</option>
           <option value="4">
             4 personas
@@ -153,9 +169,13 @@ const Dates = ({ onPersonasChange }) => {
             <h3 className="flex justify-center">
   {personas !== "todas" && `Para ${personas} personas`}
 </h3>
-            <h3 className="flex justify-center pt-4">Total</h3>
+<h3 className="flex justify-center pt-4">Monto Total de Estadía</h3>
             <h3 className="p-4 text-2xl flex justify-center">
             {`$${total.toLocaleString()}`}
+            </h3>
+            <h3 className="flex justify-center pt-4">Monto a pagar por la Reserva</h3>
+            <h3 className="p-4 text-2xl flex justify-center">
+            {`$${reserva.toLocaleString()}`}
             </h3>
 
             <button className="flex justify-center items-center p-4 border-2 border-white mx-auto">
