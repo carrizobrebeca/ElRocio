@@ -16,7 +16,7 @@ function App() {
         <Route path="/ElRocio" element={< Home/>} />
         <Route path="/laregion" element={< LaRegion/>} />
         <Route path="/la" element={< Reserva/>} />
-        <Route path="/rooms" element={< Rooms/>} />
+        <Route path="/ElRocio/rooms" element={< Rooms/>} />
       </Routes>
     </Router>
   );
