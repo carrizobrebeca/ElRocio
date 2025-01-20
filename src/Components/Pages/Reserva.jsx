@@ -86,7 +86,7 @@ const Reserva = () => {
           <option value="value3">6 personas</option>
         </select> */}
         {/* <div className="p-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4"></div> */}
-        <button onClick={() => navigate("/rooms")} className="p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4 ">Reservar</button>
+        <button onClick={() => navigate("/ElRocio/rooms")} className="p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4 ">Reservar</button>
       </div>
 {/* 
       {openDate && (
