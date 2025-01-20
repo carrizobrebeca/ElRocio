@@ -58,6 +58,22 @@ const Dates = ({ onPersonasChange }) => {
 
   const total = calcularTotal();
 
+  const cabin = () => {
+    let tipo;
+    if (personas === "todas") {
+      tipo = "";
+    } else if (personas === "2") {
+      tipo = "Estándar";
+    } else if (personas === "4") {
+      tipo = "Cuádruple";
+    } else if (personas === "6") {
+      tipo = "Familiar";
+    }
+ return tipo;
+  };
+
+  const tipo = cabin();
+
   return (
     <div>
       <div className="flex flex-col pl-2 text-[10px] md:text-lg w-[350px]">
@@ -133,11 +149,11 @@ const Dates = ({ onPersonasChange }) => {
         {/* <div className="p-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4"></div> */}
         <div className="p-4 m-4 bg-[#b59074] flex justify-center text-white md:pl-4 md:pr-4 ">
           <div>
-            <h2 className="text-base flex justify-center">1 Cabaña</h2>
+            <h2 className="text-base flex justify-center">Cabaña {tipo}</h2>
             <h3 className="flex justify-center">
   {personas !== "todas" && `Para ${personas} personas`}
 </h3>
-            <h3 className="flex justify-center">Total</h3>
+            <h3 className="flex justify-center pt-4">Total</h3>
             <h3 className="p-4 text-2xl flex justify-center">
             {`$${total.toLocaleString()}`}
             </h3>
