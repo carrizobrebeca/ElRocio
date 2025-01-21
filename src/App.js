@@ -4,6 +4,7 @@ import Home from "./Components/Views/Home";
 import LaRegion from "./Components/Pages/LaRegion";
 import Reserva from "./Components/Pages/Reserva";
 import Rooms from "./Components/Pages/Rooms";
+import Confirmada from "./Components/Pages/Confirmada";
 // import Contenedor from "./Components/Pages/Contenedor";
 
 
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/ElRocio/" element={< Home/>} />
         <Route path="/laregion" element={< LaRegion/>} />
-        <Route path="/la" element={< Reserva/>} />
+        <Route path="/ElRocio/reservastatus" element={< Confirmada/>} />
         <Route path="/ElRocio/rooms" element={< Rooms/>} />
       </Routes>
     </Router>

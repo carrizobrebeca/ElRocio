@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectStart, setStart } from "../../store/startSlice";
 import { selectEnd, setEnd } from "../../store/endSlice";
 import { differenceInDays } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const Dates = ({ onPersonasChange }) => {
+  const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
   const [personas, setPersonas] = useState("todas");
   const start = useSelector(selectStart);
@@ -79,17 +81,20 @@ const Dates = ({ onPersonasChange }) => {
     if (personas === "todas") {
       return precioPorDia = "";
     } else if (personas === "2") {
-      return precioPorDia = 60000;
+      return precioPorDia = 60000.00;
     } else if (personas === "4") {
-      return precioPorDia = 70000;
+      return precioPorDia = 70000.00;
     } else if (personas === "6") {
-      return precioPorDia = 80000;
+      return precioPorDia = 80000.00;
     }
 
   };
 
   const reserva = calcularReserva();
+
   
+
+
   return (
     <div>
       <div className="flex flex-col pl-2 text-[10px] md:text-lg w-[350px]">
@@ -178,7 +183,7 @@ const Dates = ({ onPersonasChange }) => {
             {`$${reserva.toLocaleString()}`}
             </h3>
 
-            <button className="flex justify-center items-center p-4 border-2 border-white mx-auto">
+            <button onClick={() => navigate("/ElRocio/reservastatus")} className="flex justify-center items-center p-4 border-2 border-white mx-auto">
               Reservar
             </button>
           </div>
