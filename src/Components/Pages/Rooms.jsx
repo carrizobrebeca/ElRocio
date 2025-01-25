@@ -23,7 +23,7 @@ const Rooms = () => {
         <Dates  onPersonasChange={handlePersonasChange}/>
         <div className="flex flex-col md:ml-8"> {/* Ajusta el margen a la izquierda en pantallas grandes */}
           {/* <Slider/> */}
-          {habitacionesFiltradas.map(({ src, title, description, price, detalle, detail }, index) => (
+          {habitacionesFiltradas.map(({ src, title, description, price, detalle, detail, available }, index) => (
             <RoomCard
               src={src}
               title={title}
@@ -31,6 +31,7 @@ const Rooms = () => {
               price={price}
               detalle ={detalle}
               detail ={detail}
+              available={available}
               key={index}
             />
           ))}

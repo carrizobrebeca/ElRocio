@@ -1,6 +1,6 @@
 import React from "react";
 
-const RoomCard = ({ src, title, description, price, detalle, detail }) => {
+const RoomCard = ({ src, title, description, price, detalle, detail, available }) => {
   return (
     
     <div className="p-4 md:flex md:justify-start">
@@ -11,7 +11,11 @@ const RoomCard = ({ src, title, description, price, detalle, detail }) => {
         className="transform scale-100 w-[350px] md:w-[600px] h-auto rounded-lg object-cover hover:scale-[1.03]"
       />
       <div className="w-[350px] md:w-[600px]">
-        <h3 className="m-4 text-2xl text-[#b59074] text-bold">{title}</h3>
+        <div className="flex justify-between">
+        <h3 className="m-4 text-2xl p-2 text-[#b59074] text-bold">{title} </h3>
+        <h3 className="m-4 text-2xl bg bg-green-200 border border-green-400 p-2 rounded-lg text-green-600 text-bold">{available}</h3>
+        </div>
+       
         <div className="m-4 border border-[#b59074]"></div>
         <p className="m-4">{description}</p>
         <h3 className="m-4">Precio por noche ${price}</h3>

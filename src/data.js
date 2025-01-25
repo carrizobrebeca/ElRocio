@@ -11,8 +11,8 @@ const data = [
         stock: 1,
         detalle: "No se aceptan mascotas",
         detail: "Niños mayores a 1 año deben abonar el precio completo de una persona. No se aplican tarifas especiales para niños mayores de 1 año",
-        notAvailablestart: new Date(2024, 30, 11).getTime(),
-        notAvailableend: new Date(2024, 30,11).getTime(),
+        available: "Disponible",
+        notAvailable: "No disponible",
     },
     {
         src: r2,
@@ -23,8 +23,8 @@ const data = [
         stock: 1,
         detalle: "No se aceptan mascotas",
         detail: "Niños mayores a 1 año deben abonar el precio completo de una persona. No se aplican tarifas especiales para niños mayores de 1 año",
-        notAvailablestart: new Date(2024, 30, 11).getTime(),
-        notAvailableend: new Date(2024, 30,11).getTime(),
+        available: "Disponible",
+        notAvailable: "No disponible",
     },
     {
         src: r3,
@@ -35,8 +35,8 @@ const data = [
         stock: 1,
         detalle: "No se aceptan mascotas",
         detail: "Niños mayores a 1 año deben abonar el precio completo de una persona. No se aplican tarifas especiales para niños mayores de 1 año",
-        notAvailablestart: new Date(2024, 30, 11).getTime(),
-        notAvailableend: new Date(2024, 30,11).getTime(),
+        available: "Disponible",
+        notAvailable: "No disponible",
     },
 ]
 

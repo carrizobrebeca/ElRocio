@@ -10,6 +10,7 @@ import { selectStart, setStart } from "../../store/startSlice";
 import { selectEnd, setEnd } from "../../store/endSlice";
 import { differenceInDays } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { crearReserva } from "../../store/reservaSlice";
 
 const Dates = ({ onPersonasChange }) => {
   const navigate = useNavigate();
@@ -17,12 +18,17 @@ const Dates = ({ onPersonasChange }) => {
   const [personas, setPersonas] = useState("todas");
   const start = useSelector(selectStart);
   const end = useSelector(selectEnd);
+  const { status } = useSelector((state) => state.reservas);
+
   const dispatch = useDispatch();
   const selectionRange = {
     startDate: start,
     endDate: end,
     key: "selection",
   };
+  const startForDatabase = format(start, "yyyy-MM-dd");
+  const endForDatabase = format(end, "yyyy-MM-dd");
+
 
   const handleSelect = (ranges) => {
     dispatch(setStart(ranges.selection.startDate))
@@ -71,7 +77,7 @@ const Dates = ({ onPersonasChange }) => {
     } else if (personas === "6") {
       tipo = "Familiar";
     }
- return tipo;
+    return tipo;
   };
 
   const tipo = cabin();
@@ -92,7 +98,45 @@ const Dates = ({ onPersonasChange }) => {
 
   const reserva = calcularReserva();
 
-  
+  const [state, setState] = useState({
+    dateStart: start,
+    dateEnd: end,
+    bookingPrice: total,
+    totalPrice: reserva,
+    category: tipo,
+    status: "pending",
+    stock: "1",
+
+  });
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+  };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const reservaData = {
+      ...state,
+      dateStart: start,
+      dateEnd: end,
+      category: tipo,
+      bookingPrice: reserva,  // Asegúrate de usar el valor calculado
+      totalPrice: total,  // Asegúrate de usar el valor calculado
+    };
+
+    dispatch(crearReserva(reservaData));
+    if (status === "succeeded") {
+      navigate("/ElRocio/reservastatus");
+    }
+  };
 
 
   return (
@@ -106,8 +150,8 @@ const Dates = ({ onPersonasChange }) => {
           <h2>
             Desde
           </h2>
-          <h2>
-            {`${format(start, "dd,MMM,yyyy")}`}
+          <h2 value={startForDatabase} name="dateStart" id="dateStart" onChange={handleChange}>
+            {startForDatabase}
           </h2>
           {/* <div className="text-[#b59074"> */}
           <svg
@@ -133,8 +177,8 @@ const Dates = ({ onPersonasChange }) => {
           <h2>
             Hasta
           </h2>
-          <h2>
-            {`${format(end, "dd,MMM,yyyy")}`}
+          <h2 value={endForDatabase} name="dateEnd" id="dateEnd" onChange={handleChange}>
+            {endForDatabase}
           </h2>
 
           {/* <div className="text-[#b59074"> */}
@@ -158,9 +202,9 @@ const Dates = ({ onPersonasChange }) => {
           className="p-4 flex justify-center custom-border focus:outline-none bg-white text-[#b59074] custom-border option:hover"
           name="select"
           onChange={handleSelectChange}
-          value={personas} 
+          value={personas}
         >
-           <option value="todas">Todas las cabañas</option>
+          <option value="todas">Todas las cabañas</option>
           <option value="2">2 personas</option>
           <option value="4">
             4 personas
@@ -170,20 +214,29 @@ const Dates = ({ onPersonasChange }) => {
         {/* <div className="p-0 custom-border bg-white text-[#b59074] md:pl-4 md:pr-4"></div> */}
         <div className="p-4 m-4 bg-[#b59074] flex justify-center text-white md:pl-4 md:pr-4 ">
           <div>
-            <h2 className="text-base flex justify-center">Cabaña {tipo}</h2>
+            <h2 value={state.category}
+              name="category"
+              id="category"
+              onChange={handleChange} className="text-base flex justify-center">Cabaña {tipo}</h2>
             <h3 className="flex justify-center">
-  {personas !== "todas" && `Para ${personas} personas`}
-</h3>
-<h3 className="flex justify-center pt-4">Monto Total de Estadía</h3>
-            <h3 className="p-4 text-2xl flex justify-center">
-            {`$${total.toLocaleString()}`}
+              {personas !== "todas" && `Para ${personas} personas`}
+            </h3>
+            <h3 className="flex justify-center pt-4">Monto Total de Estadía</h3>
+            <h3 value={state.totalPrice}
+              name="totalPrice"
+              id="totalPrice"
+              onChange={handleChange} className="p-4 text-2xl flex justify-center">
+              {`$${total.toLocaleString()}`}
             </h3>
             <h3 className="flex justify-center pt-4">Monto a pagar por la Reserva</h3>
-            <h3 className="p-4 text-2xl flex justify-center">
-            {`$${reserva.toLocaleString()}`}
+            <h3 value={state.bookingPrice}
+              name="bookingPrice"
+              id="bookingPrice"
+              onChange={handleChange} className="p-4 text-2xl flex justify-center">
+              {`$${reserva.toLocaleString()}`}
             </h3>
 
-            <button onClick={() => navigate("/ElRocio/reservastatus")} className="flex justify-center items-center p-4 border-2 border-white mx-auto">
+            <button onClick={handleSubmit} className="flex justify-center items-center p-4 border-2 border-white mx-auto">
               Reservar
             </button>
           </div>
