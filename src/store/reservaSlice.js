@@ -50,7 +50,7 @@ const reservaSlice = createSlice({
     .addCase(fetchReservas.fulfilled, (state, action) => {
       state.status = "succeeded";
       state.reservasDB = action.payload;
-      alert("Reserva");
+      
     })
     .addCase(fetchReservas.rejected, (state, action) => {
       state.status = "failed";

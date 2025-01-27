@@ -15,7 +15,7 @@ import { crearReserva } from "../../store/reservaSlice";
 const Dates = ({ onPersonasChange }) => {
   const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
-  const [personas, setPersonas] = useState("todas");
+  const [personas, setPersonas] = useState("todas"); //aca tengo 
   const start = useSelector(selectStart);
   const end = useSelector(selectEnd);
   const { status } = useSelector((state) => state.reservas);
@@ -28,8 +28,7 @@ const Dates = ({ onPersonasChange }) => {
   };
   const startForDatabase = format(start, "yyyy-MM-dd");
   const endForDatabase = format(end, "yyyy-MM-dd");
-
-
+ 
   const handleSelect = (ranges) => {
     dispatch(setStart(ranges.selection.startDate))
     dispatch(setEnd(ranges.selection.endDate))
@@ -65,6 +64,7 @@ const Dates = ({ onPersonasChange }) => {
   };
 
   const total = calcularTotal();
+
 
   const cabin = () => {
     let tipo;
@@ -108,6 +108,7 @@ const Dates = ({ onPersonasChange }) => {
     stock: "1",
 
   });
+
 
   const handleChange = (e) => {
     e.preventDefault();
