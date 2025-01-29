@@ -5,6 +5,7 @@ import LaRegion from "./Components/Pages/LaRegion";
 import Reserva from "./Components/Pages/Reserva";
 import Rooms from "./Components/Pages/Rooms";
 import Confirmada from "./Components/Pages/Confirmada";
+import SearchReserva from "./Components/Pages/SearchReserva";
 // import Contenedor from "./Components/Pages/Contenedor";
 
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/laregion" element={< LaRegion/>} />
         <Route path="/ElRocio/reservastatus" element={< Confirmada/>} />
         <Route path="/ElRocio/rooms" element={< Rooms/>} />
+        <Route path="/ElRocio/reservas" element={< SearchReserva/>} />
       </Routes>
     </Router>
   );

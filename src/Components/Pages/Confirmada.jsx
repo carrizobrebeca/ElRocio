@@ -1,100 +1,142 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../data";
 import RoomCard from "./RoomCard";
 import Navbar from "./Navbar";
 import style from "./container.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchReservasById } from "../../store/reservaSlice";
+import { fetchReservas, fetchReservasById } from "../../store/reservaSlice";
+import RoomCardReserva from "./RoomCardReserva";
 
 const Confirmada = () => {
   const [searchId, setSearchId] = useState(""); // Estado para el ID ingresado
   const dispatch = useDispatch(); // Hook para despachar acciones
-  const { selectedReserva, status, error } = useSelector((state) => state.reservas); // Obtener el estado de las reservas
-
-  const habitacionesFiltradas = selectedReserva ? data.filter((habitacion) => habitacion.price === selectedReserva.bookingPrice) : [];
+  const { reservasDB, status, error } = useSelector((state) => state.reservas); // Obtener el estado de las reservas
 
 
-  // Manejar el cambio en el campo de búsqueda
-  const handleSearchChange = (e) => {
-    setSearchId(e.target.value);
-    console.log(searchId);
-    
-  };
+  const [todasLasReservas, setTodasLasReservas] = useState([]);
+  const [ultimaReserva, setUltimaReserva] = useState([]);
 
-  // Manejar la búsqueda cuando el usuario hace clic
-  const handleSearch = () => {
-    if (searchId) {
-      dispatch(fetchReservasById(searchId)); // Despachar la acción para buscar la reserva por ID
+  const [reservaActiva, setReservaActiva] = useState(null);
+
+  const habitacionesFiltradas = reservaActiva ? data.filter((habitacion) => habitacion.price === reservaActiva.bookingPrice) : [];
+
+
+  console.log();
+
+  useEffect(() => {
+    // Recuperar la reserva de localStorage
+    const reservaData = localStorage.getItem("reservaActiva");
+
+    if (reservaData) {
+      setReservaActiva(JSON.parse(reservaData)); // Convertir de string JSON a objeto
     }
-  };
+  }, []);
+
+
+
+  useEffect(() => {
+    dispatch(fetchReservas());  // Esto disparará la acción para cargar las reservas desde la API
+  }, [dispatch]);
+
+
+  // Filtra las habitaciones según la cantidad de personas seleccionadas
+
+  useEffect(() => {
+    if (status === "succeeded") {
+      setTodasLasReservas(reservasDB);  // Asignamos las reservasDB al estado todasLasReservas
+    }
+  }, [status, reservasDB]);
+
+  useEffect(() => {
+    // Filtra las reservas según la categoría y la fecha de inicio
+    const ultimaReserva = todasLasReservas.filter(
+      (reserva) =>
+        reserva.category === reservaActiva.category && reserva.dateStart === reservaActiva.dateStart
+    );
+
+    // Si se encontró una reserva, establece el id de la última reserva a reservaActiva
+    if (ultimaReserva.length > 0) {
+      setUltimaReserva(ultimaReserva);
+      // Aquí asignamos el id de la primera reserva en ultimaReserva (asumiendo que hay solo una)
+      setReservaActiva((prevReserva) => ({
+        ...prevReserva,
+        id: ultimaReserva[0].id,
+      }));
+    }
+  }, [todasLasReservas]);
+
+
 
   return (
     <>
       <Navbar />
       <div>
-        <div className="flex justify-center items-center w-ful pl-10 pr-10 pt-4 pb-4 bg-[#b5907422]">
-          <label className="pl-10 pr-10" htmlFor="">Buscar Reserva</label>
-          <input
-            className="pl-10 pr-10 rounded-lg border border-[#b59074]"
-            type="text"
-            placeholder="000000000000"
-            value={searchId}
-            onChange={handleSearchChange}
-          />
-          <button className="pl-10 pr-10" onClick={handleSearch}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-          </button>
-        </div>
 
+
+        <div>
+          {reservaActiva ? (
+            <div className="">
+              <div className="grid grid-cols-1 pt-10 divide-y divide-[#b59074] divide-4">
+
+                <div className="flex justify-start pl-32">
+                  <h2 className="text-3xl">Código de reserva: {reservaActiva.id}</h2>
+                </div>
+                <div className="flex justify-start pl-32">
+                  <h2>Monto pagado por reserva: $ {reservaActiva.bookingPrice}</h2>
+                </div>
+                <div className="flex justify-start pl-32">
+                  <h2>Monto total de estadía: $ {reservaActiva.totalPrice}</h2>
+                </div>
+                <div className="flex justify-start pl-32">
+                  <h2> Estado de la reserva: {
+                    reservaActiva.status === "pending" ? " pendiente de pago" :
+                      reservaActiva.status === "succeeded" ? " aprobado" :
+                        reservaActiva.status
+                  }</h2>
+                </div>
+                <div className="flex justify-start pl-32">
+                  <h2>Desde: {new Date(reservaActiva.dateStart).toLocaleDateString()}</h2>
+                </div>
+                <div className="flex justify-start pl-32">
+                  <h2>Hasta: {new Date(reservaActiva.dateEnd).toLocaleDateString()}</h2>
+                </div>
+              </div>
+            </div>
+
+          ) : (
+            <p>Error al cargar la reserva </p>
+          )}
+        </div>
         <div className="">
           <div className="grid grid-cols-1 pt-10 divide-y divide-[#b59074] divide-4">
-            
-            <div className="flex justify-start pl-32">
-              <h2>Còdigo de reserva: {selectedReserva ? selectedReserva.id : "Cargando..."}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Monto pagado por reserva: {selectedReserva ? selectedReserva.bookingPrice : "Cargando..."}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Monto total de estadía: {selectedReserva ? selectedReserva.totalPrice : "Cargando..."}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Estado de la reserva: {selectedReserva ? selectedReserva.status : "Cargando..."}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Desde: {selectedReserva ? new Date(selectedReserva.dateStart).toLocaleDateString('en-CA') : "Cargando..."}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Hasta: {selectedReserva ? new Date(selectedReserva.dateEnd).toLocaleDateString('en-CA') : "Cargando..."}</h2>
-            </div>
 
-           
-              <div className="bg-[#b5907422] pt-4 flex flex-row justify-start items-center text-[#b59074] md:pl-16">
-                <div className="inline-block">
-                  <div className="flex justify-end items-end pt-4">
-                    <div className="pb-4 pl-2 pt-10 flex flex-row justify-start items-center md:text-2xl md:pl-16">
-                    {habitacionesFiltradas.length > 0 ? (
-                        habitacionesFiltradas.map(({ src, title, description, price, detalle, detail }, index) => (
-                          <RoomCard
-                            src={src}
-                            title={title}
-                            description={description}
-                            price={price}
-                            detalle={detalle}
-                            detail={detail}
-                            key={index}
-                          />
-                        ))
-                      ) : (
-                        <h3 className="text-white">No se encontraron habitaciones para esta reserva.</h3>
-                      )}
-                    </div>
+
+
+
+            <div className="bg-[#b5907422] pt-4 flex flex-row justify-start items-center text-[#b59074] md:pl-16">
+              <div className="inline-block">
+                <div className="flex justify-end items-end pt-4">
+                  <div className="pb-4 pl-2 pt-10 flex flex-row justify-start items-center md:text-2xl md:pl-16">
+                    {Array.isArray(habitacionesFiltradas) && habitacionesFiltradas.length > 0 ? (
+                      habitacionesFiltradas.map(({ src, title, description, price, detalle, detail }, index) => (
+                        <RoomCard
+                          src={src}
+                          title={title}
+                          description={description}
+                          price={price}
+                          detalle={detalle}
+                          detail={detail}
+                          key={index}
+                        />
+                      ))
+                    ) : (
+                      <h3 className="text-white">No se encontraron habitaciones para esta reserva.</h3>
+                    )}
                   </div>
                 </div>
               </div>
-         
+            </div>
+
           </div>
         </div>
       </div>
@@ -104,68 +146,3 @@ const Confirmada = () => {
 
 export default Confirmada;
 
-// const Confirmada = () => {
-//   const habitacionesFiltradas = data.filter((habitacion) => habitacion.title.includes("Familiar"));
-
-//   return (
-//     <>
-//       <Navbar />
-//       <div >
-//         <div className="flex justify-center items-center w-ful pl-10 pr-10 pt-4 pb-4 bg-[#b5907422]">
-//           <label className="pl-10 pr-10" htmlFor="">Buscar Reserva</label>
-//           <input className="pl-10 pr-10 rounded-lg border  border-[#b59074]" type="number" placeholder="000000000000"/>
-//         <button className="pl-10 pr-10"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-//           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-//         </svg>
-//         </button>
-// </div>
-//         <div className="">
-//           <div className="grid grid-cols-1 pt-10 divide-y divide-[#b59074] divide-4">
-            
-//             <div className="flex justify-start pl-32">
-//               <h2>Còdigo de reserva: </h2>
-//             </div>
-//             <div className="flex justify-start pl-32">
-//               <h2>Monto pagado por reserva: </h2>
-//             </div>
-//             <div className="flex justify-start pl-32">
-//               <h2>Monto total de estadìa: </h2>
-//             </div>
-//             <div className="flex justify-start pl-32">
-//               <h2>Estado de la reserva: </h2>
-//             </div>
-//             <div className="flex justify-start pl-32">
-//               <h2>Desde: </h2>
-//             </div>
-//             <div className="flex justify-start pl-32">
-//               <h2>Hasta: </h2>
-//             </div>
-//             <div className=" bg-[#b5907422] pt-4 flex flex-row justify-start items-center text-[#b59074] md:pl-16">
-//               <div className="inline-block">
-//                 <div className="flex justify-end items-end pt-4">
-//                 <div className="pb-4 pl-2 pt-10 flex flex-row justify-start items-center md:text-2xl md:pl-16">
-//                 {habitacionesFiltradas.map(({ src, title, description, price, detalle, detail }, index) => (
-//             <RoomCard
-//               src={src}
-//               title={title}
-//               description={description}
-//               price={price}
-//               detalle ={detalle}
-//               detail ={detail}
-//               key={index}
-//             />
-//           ))}
-//             </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-
-//         </div>
-//       </div>
-
-//     </>
-//   );
-// };
-
-// export default Confirmada;

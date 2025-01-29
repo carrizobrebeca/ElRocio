@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import style from "./dates.module.css";
 import { es } from "date-fns/locale";
@@ -18,7 +18,7 @@ const Dates = ({ onPersonasChange }) => {
   const [personas, setPersonas] = useState("todas"); //aca tengo 
   const start = useSelector(selectStart);
   const end = useSelector(selectEnd);
-  const { status } = useSelector((state) => state.reservas);
+  const { createReservaStatus } = useSelector((state) => state.reservas);
 
   const dispatch = useDispatch();
   const selectionRange = {
@@ -132,14 +132,18 @@ const Dates = ({ onPersonasChange }) => {
       bookingPrice: reserva,  // Asegúrate de usar el valor calculado
       totalPrice: total,  // Asegúrate de usar el valor calculado
     };
-
+    localStorage.setItem("reservaActiva", JSON.stringify(reservaData));
     dispatch(crearReserva(reservaData));
-    if (status === "succeeded") {
+    
+    
+  };
+  useEffect(() => {
+    // Solo navegar si el estado de la creación de la reserva es 'succeeded'
+    if (createReservaStatus === "succeeded") {
       navigate("/ElRocio/reservastatus");
     }
-  };
-
-
+  }, [createReservaStatus, navigate]);
+ 
   return (
     <div>
       <div className="flex flex-col pl-2 text-[10px] md:text-lg w-[350px]">

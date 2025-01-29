@@ -94,6 +94,14 @@ const Navbar = () => {
             </svg>
           </button>
         )}
+         {location.pathname === "/ElRocio/" && (
+          <button
+            onClick={() => navigate("/ElRocio/reservas")}
+            className="p-2 text-white text-bold rounded-full hover:text-[#b59074] hover:cursor-pointer transition"
+          >
+           <h2 className="">Tu reserva</h2>
+          </button>
+        )}
       </nav>
     </>
   );

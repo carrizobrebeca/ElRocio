@@ -39,6 +39,7 @@ const reservaSlice = createSlice({
     reservasDB : [],
     selectedReserva: null,
     status: "idle",
+    createReservaStatus: "idle",
     error: null,
   },
   reducers: {},
@@ -57,17 +58,18 @@ const reservaSlice = createSlice({
       state.error = action.error.message;
     })
       .addCase(crearReserva.pending, (state) => {
-        state.status = "loading";
+        state.createReservaStatus = "loading";
       })
       .addCase(crearReserva.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.createReservaStatus = "succeeded";
         state.allReservas = action.payload;
+       
         alert("Reserva creada con éxito");
       })
       .addCase(crearReserva.rejected, (state, action) => {
-        state.status = "failed";
+        state.createReservaStatus = "failed";
         state.error = action.error.message;
-        alert("Error al crear Reserva");
+        alert("Las fechas seleccionadas no estan disponibles");
       })
       .addCase(fetchReservasById.pending, (state) => {
         state.status = "loading";

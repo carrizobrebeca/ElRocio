@@ -1,8 +1,8 @@
 import React from "react";
 
 
-const RoomCard = ({ src, title, description, price, detalle, detail, available, notAvailable, noAvaiableDate  }) => {
-  const isNotAvailable = noAvaiableDate.length > 0;
+const RoomCard = ({ src, title, description, price, detalle, detail }) => {
+ 
   return (
     
     <div className="p-4 md:flex md:justify-start">
@@ -15,15 +15,7 @@ const RoomCard = ({ src, title, description, price, detalle, detail, available, 
       <div className="w-[350px] md:w-[600px]">
         <div className="flex justify-between">
         <h3 className="m-4 text-2xl p-2 text-[#b59074] text-bold">{title} </h3>
-        {isNotAvailable ? (
-            <h3 className="m-4 text-2xl bg bg-red-200 border border-red-400 p-2 rounded-lg text-red-600 text-bold">
-              {notAvailable}
-            </h3>
-          ) : (
-            <h3 className="m-4 text-2xl bg bg-green-200 border border-green-400 p-2 rounded-lg text-green-600 text-bold">
-              {available}
-            </h3>
-          )}
+   
         </div>
        
         <div className="m-4 border border-[#b59074]"></div>
