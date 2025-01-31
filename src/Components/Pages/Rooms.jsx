@@ -8,6 +8,7 @@ import { fetchReservas } from "../../store/reservaSlice";
 import { format } from "date-fns";
 import { selectEnd } from "../../store/endSlice";
 import { selectStart } from "../../store/startSlice";
+import RoomCardReserva from "./RoomCardReserva";
 
 
 const Rooms = () => {
@@ -83,7 +84,7 @@ const Rooms = () => {
         <div className="flex flex-col md:ml-8"> {/* Ajusta el margen a la izquierda en pantallas grandes */}
           {/* <Slider/> */}
           {habitacionesFiltradas.map(({ src, title, description, price, detalle, detail, available, notAvailable }, index) => (
-            <RoomCard
+            <RoomCardReserva
               src={src}
               title={title}
               description={description}

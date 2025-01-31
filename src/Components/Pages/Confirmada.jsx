@@ -6,13 +6,19 @@ import style from "./container.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchReservas, fetchReservasById } from "../../store/reservaSlice";
 import RoomCardReserva from "./RoomCardReserva";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { title } from "framer-motion/client";
+import axios from "axios";
 
 const Confirmada = () => {
+  const [preferenceId, setPreferenceId] = useState(null);
   const [searchId, setSearchId] = useState(""); // Estado para el ID ingresado
   const dispatch = useDispatch(); // Hook para despachar acciones
   const { reservasDB, status, error } = useSelector((state) => state.reservas); // Obtener el estado de las reservas
+  initMercadoPago("APP_USR-13c5ffaf-d24f-4887-97f9-e9abe4b6d758", { locale: "es-AR" });
 
 
+  
   const [todasLasReservas, setTodasLasReservas] = useState([]);
   const [ultimaReserva, setUltimaReserva] = useState([]);
 
@@ -21,7 +27,7 @@ const Confirmada = () => {
   const habitacionesFiltradas = reservaActiva ? data.filter((habitacion) => habitacion.price === reservaActiva.bookingPrice) : [];
 
 
-  console.log();
+
 
   useEffect(() => {
     // Recuperar la reserva de localStorage
@@ -65,8 +71,31 @@ const Confirmada = () => {
     }
   }, [todasLasReservas]);
 
+  const createPreference = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/create_preference",
+        {
+          title: reservaActiva.bookingPrice,
+          quantity: 1,
+          price: Number(reservaActiva.bookingPrice),
+        }
+      );
 
+      const { id } = response.data;
+      return id;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleBuy = async () => {
+    const id = await createPreference();
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
 
+  
   return (
     <>
       <Navbar />
@@ -139,6 +168,16 @@ const Confirmada = () => {
 
           </div>
         </div>
+        <div className="flex flex-row justify-center items-center p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4">
+        <button onClick={handleBuy} className="flex flex-row justify-center items-center p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4">Pagar Reserva</button>
+       
+        </div>
+        <div className="flex flex-row justify-center items-center p-2 bg-[#d5b9a4] text-white md:pl-4 md:pr-4">
+       
+        { preferenceId && <Wallet initialization={{ preferenceId: preferenceId}} /> }
+        </div>
+        
+
       </div>
     </>
   );

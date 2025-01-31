@@ -1,108 +1,41 @@
-import React, { useEffect, useState } from "react";
-import data from "../../data";
-import RoomCard from "./RoomCard";
-import Navbar from "./Navbar";
-import style from "./container.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchReservas, fetchReservasById } from "../../store/reservaSlice";
-import RoomCardReserva from "./RoomCardReserva";
 
-const Confirmada = () => {
-  const [searchId, setSearchId] = useState(""); // Estado para el ID ingresado
-  const { selectedReserva, status, error } = useSelector((state) => state.reservas); // Obtener el estado de las reservas
- const dispatch = useDispatch();
-  const habitacionesFiltradas = selectedReserva ? data.filter((habitacion) => habitacion.price === selectedReserva.bookingPrice) : [];
- 
+import React from "react";
 
-  // Manejar el cambio en el campo de búsqueda
-  const handleSearchChange = (e) => {
-    setSearchId(e.target.value);
-    console.log(searchId);
-    
-  };
 
-  // Manejar la búsqueda cuando el usuario hace clic
-  const handleSearch = () => {
-    if (searchId) {
-      dispatch(fetchReservasById(searchId)); // Despachar la acción para buscar la reserva por ID
-    }
-  };
-
+const RoomCardReserva = ({ src, title, description, price, detalle, detail, available, notAvailable, noAvaiableDate  }) => {
+  const isNotAvailable = noAvaiableDate.length > 0;
   return (
-    <>
-      <Navbar />
-      <div>
-        <div className="flex justify-center items-center w-ful pl-10 pr-10 pt-4 pb-4 bg-[#b5907422]">
-          <label className="pl-10 pr-10" htmlFor="">Buscar Reserva</label>
-          <input
-            className="pl-10 pr-10 rounded-lg border border-[#b59074]"
-            type="text"
-            placeholder="000000000000"
-            value={searchId}
-            onChange={handleSearchChange}
-          />
-          <button className="pl-10 pr-10" onClick={handleSearch}>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-          </button>
-        </div>
-
     
-        <div className="">
-          <div className="grid grid-cols-1 pt-10 divide-y divide-[#b59074] divide-4">
-            
-            <div className="flex justify-start pl-32">
-              <h2>Còdigo de reserva: {selectedReserva ? selectedReserva.id : ""}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Monto pagado por reserva: {selectedReserva ? selectedReserva.bookingPrice : ""}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Monto total de estadía: {selectedReserva ? selectedReserva.totalPrice : ""}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Estado de la reserva: {selectedReserva ? selectedReserva.status : ""}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Desde: {selectedReserva ? new Date(selectedReserva.dateStart).toLocaleDateString('en-CA') : ""}</h2>
-            </div>
-            <div className="flex justify-start pl-32">
-              <h2>Hasta: {selectedReserva ? new Date(selectedReserva.dateEnd).toLocaleDateString('en-CA') : ""}</h2>
-            </div>
+    <div className="p-4 md:flex md:justify-start">
 
-           
-              <div className="bg-[#b5907422] pt-4 flex flex-row justify-start items-center text-[#b59074] md:pl-16">
-                <div className="inline-block">
-                  <div className="flex justify-end items-end pt-4">
-                    <div className="pb-4 pl-2 pt-10 flex flex-row justify-start items-center md:text-2xl md:pl-16">
-                    {habitacionesFiltradas.length > 0 ? (
-                        habitacionesFiltradas.map(({ src, title, description, price, detalle, detail }, index) => (
-                          <RoomCard
-                            src={src}
-                            title={title}
-                            description={description}
-                            price={price}
-                            detalle={detalle}
-                            detail={detail}
-                            key={index}
-                          />
-                        ))
-                      ) : (
-                        <h3 className="text-white">No se encontraron habitaciones para esta reserva.</h3>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-         
-          </div>
+<img
+        src={src}
+        alt={title}
+        className="transform scale-100 w-[350px] md:w-[600px] h-auto rounded-lg object-cover hover:scale-[1.03]"
+      />
+      <div className="w-[350px] md:w-[600px]">
+        <div className="flex justify-between">
+        <h3 className="m-4 text-2xl p-2 text-[#b59074] text-bold">{title} </h3>
+      
+        {isNotAvailable ? (
+            <h3 className="m-4 text-2xl bg bg-red-200 border border-red-400 p-2 rounded-lg text-red-600 text-bold">
+              {notAvailable}
+            </h3>
+          ) : (
+            <h3 className="m-4 text-2xl bg bg-green-200 border border-green-400 p-2 rounded-lg text-green-600 text-bold">
+              {available}
+            </h3>
+          )}
         </div>
+
+        <div className="m-4 border border-[#b59074]"></div>
+        <p className="m-4">{description}</p>
+        <h3 className="m-4">Precio por noche ${price}</h3>
+        <p className="m-4">*{detalle}</p>
+        <p className="m-4">*{detail}</p>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Confirmada;
-
-
+export default RoomCardReserva;
