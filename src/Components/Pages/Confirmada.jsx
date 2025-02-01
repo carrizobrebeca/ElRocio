@@ -68,7 +68,7 @@ const Confirmada = () => {
   const createPreference = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/create_preference",
+        "https://elrocio-back-production.up.railway.app/create_preference",
         {
           title: reservaActiva.bookingPrice,
           quantity: 1,

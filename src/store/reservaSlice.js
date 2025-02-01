@@ -5,7 +5,7 @@ import axios from "axios";
 export const fetchReservas = createAsyncThunk(
   "reservas/fetchReservas",
   async () => {
-    const response = await axios.get(`http://localhost:3001/reservas/`
+    const response = await axios.get(`https://elrocio-back-production.up.railway.app/reservas/`
     );
     return response.data;
   }
@@ -14,7 +14,7 @@ export const fetchReservas = createAsyncThunk(
 export const fetchReservasById = createAsyncThunk(
   "reservas/fetchReservasById",
   async (id) => {
-    const response = await axios.get(`http://localhost:3001/reservas/${id}`
+    const response = await axios.get(`https://elrocio-back-production.up.railway.app/reservas/${id}`
     );
     return response.data;
   }
@@ -23,7 +23,7 @@ export const crearReserva = createAsyncThunk(
   "reservas/crearReserva",
   async (reservaData) => {
     const response = await axios.post(
-      `http://localhost:3001/reservas`,
+      `https://elrocio-back-production.up.railway.app/reservas`,
       reservaData
     );
     return response.data;
