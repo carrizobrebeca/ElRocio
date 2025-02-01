@@ -11,23 +11,17 @@ import { title } from "framer-motion/client";
 import axios from "axios";
 
 const Confirmada = () => {
+  initMercadoPago(process.env.REACT_APP_MERCADO_PAGO_KEY, { locale: "es-AR" });
   const [preferenceId, setPreferenceId] = useState(null);
   const [searchId, setSearchId] = useState(""); // Estado para el ID ingresado
   const dispatch = useDispatch(); // Hook para despachar acciones
   const { reservasDB, status, error } = useSelector((state) => state.reservas); // Obtener el estado de las reservas
-  initMercadoPago("APP_USR-13c5ffaf-d24f-4887-97f9-e9abe4b6d758", { locale: "es-AR" });
-
-
   
   const [todasLasReservas, setTodasLasReservas] = useState([]);
   const [ultimaReserva, setUltimaReserva] = useState([]);
-
   const [reservaActiva, setReservaActiva] = useState(null);
 
   const habitacionesFiltradas = reservaActiva ? data.filter((habitacion) => habitacion.price === reservaActiva.bookingPrice) : [];
-
-
-
 
   useEffect(() => {
     // Recuperar la reserva de localStorage
